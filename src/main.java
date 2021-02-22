@@ -39,10 +39,25 @@ public class main {
                 System.out.println("You have been sent back to the start");
                 activeRoom = 1;
             } else {
-                int input = scanner.nextInt();
-                while (input < 1 || input > links.size()) {
-                    System.out.println("Illegal choice, try again");
-                    input = scanner.nextInt();
+
+
+                String inputString = scanner.nextLine();
+                int input;
+                try {
+                    input = Integer.parseInt(inputString);
+                } catch (NumberFormatException nfe){
+                    input = -1;
+                }
+
+                while (!(input >= 1 && input <= links.size())) {
+                    System.out.println("Illegal choice: [" + inputString +"], try again");
+
+                    inputString = scanner.nextLine();
+                    try {
+                        input = Integer.parseInt(inputString);
+                    } catch (NumberFormatException nfe){
+                        input = -1;
+                    }
                 }
                 activeRoom = links.get(input - 1);
             }
